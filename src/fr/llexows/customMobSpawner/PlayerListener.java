@@ -8,6 +8,7 @@ import org.bukkit.block.CreatureSpawner;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -26,13 +27,13 @@ public class PlayerListener implements Listener {
     private HashMap<Player, CreatureSpawner> playerSpawner = new HashMap<>();
     private SpawnerManager spawnerManager = Core.getSpawnerManager();
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerInteract(PlayerInteractEvent e){
         final Player player = e.getPlayer();
         if(e.getAction() == Action.RIGHT_CLICK_BLOCK){
             Block b = e.getClickedBlock();
             if(b.getType().equals(Material.MOB_SPAWNER)){
-                if(player.isOp()){
+                if(player.isOp() || player.hasPermission("custommobspawner.use")){
                     spawnerManager.openSelectionInventory(player, 1);
                     playerSpawner.put(player, (CreatureSpawner) b.getState());
                 }
@@ -40,7 +41,7 @@ public class PlayerListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerSelectType(InventoryClickEvent e){
         final Player player = (Player) e.getWhoClicked();
         if(e.getInventory().equals(spawnerManager.getSpawnerTypeInventory(1)) || e.getClickedInventory().equals(spawnerManager.getSpawnerTypeInventory(2))){

@@ -24,18 +24,25 @@ import java.util.HashMap;
  */
 public class Core extends JavaPlugin {
 
+    private static Core instance;
     private static SpawnerManager spawnerManager;
 
     @Override
     public void onEnable() {
+        instance = this;
         spawnerManager = new SpawnerManager(this);
         spawnerManager.init();
         getServer().getPluginManager().registerEvents(new PlayerListener(), this);
+        getCommand("customspawner").setExecutor(new PluginCommands(this));
     }
 
     @Override
     public void onDisable() {
 
+    }
+
+    public static Core getInstance(){
+        return instance;
     }
 
     public static SpawnerManager getSpawnerManager(){
