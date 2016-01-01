@@ -2,6 +2,7 @@ package fr.llexows.customMobSpawner.commands;
 
 import fr.llexows.customMobSpawner.Core;
 import fr.llexows.customMobSpawner.Utils;
+import fr.llexows.customMobSpawner.managers.ConfigManager;
 import org.bukkit.entity.Player;
 
 /**
@@ -9,7 +10,7 @@ import org.bukkit.entity.Player;
  *
  * @version 0.1
  */
-public class ReloadConfigCommand extends PluginCommand {
+public final class ReloadConfigCommand extends PluginCommand {
 
     public ReloadConfigCommand() {
         super("rconfig", "customspawner.rconfig");
@@ -18,6 +19,6 @@ public class ReloadConfigCommand extends PluginCommand {
     @Override
     public void execute(Player player, String[] args) {
         instance.reloadConfig();
-        Utils.sendMessage(player, "§3Configuration reloaded !");
+        Utils.sendMessage(player, ConfigManager.getMessage("config-reloaded"));
     }
 }

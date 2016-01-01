@@ -1,6 +1,8 @@
 package fr.llexows.customMobSpawner.commands;
 
 import fr.llexows.customMobSpawner.Utils;
+import fr.llexows.customMobSpawner.managers.ConfigManager;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -10,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
  *
  * @version 0.1
  */
-public class GiveCommand extends PluginCommand {
+public final class GiveCommand extends PluginCommand {
 
     public GiveCommand() {
         super("give", "customspawner.give");
@@ -23,19 +25,20 @@ public class GiveCommand extends PluginCommand {
         switch(args.length){
             case 1:
                 player.getInventory().addItem(spawner);
-                Utils.sendMessage(player, "§aYou recieved a mob spawner.");
+                Utils.sendMessage(player, ConfigManager.getMessage("recieved-mob-spawner"));
                 break;
             case 2:
-                int ammount = 0;
-                try{
-                    ammount = Integer.parseInt(args[1]);
-                }catch(NumberFormatException e){
-                    Utils.sendMessage(player, "§cPlease enter a valid ammount.");
-                    return;
+                for(Player pl : Bukkit.getOnlinePlayers()){
+                    if(pl.getName().toLowerCase().equalsIgnoreCase(args[1].toLowerCase())){
+                        pl.getInventory().addItem(spawner);
+                        Utils.sendMessage(player, ConfigManager.getMessage("give-spawner-player").replace("%player%", pl.getName()));
+                        return;
+                    }
                 }
-                spawner.setAmount(ammount == 0 ? 1 : ammount);
+
                 player.getInventory().addItem(spawner);
-                Utils.sendMessage(player, "§aYou recieved " + ammount + " mob spawners.");
+                Utils.sendMessage(player, "§aYou recieved a mob spawner.");
+
                 break;
         }
     }
