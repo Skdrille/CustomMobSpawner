@@ -1,8 +1,25 @@
-name: CustomMobSpawner
-version: 0.0.1
+name: CustomSpawner
+version: 1.0.0
 author: Llexows
 main: fr.llexows.customMobSpawner.Core
+depend: [Vault]
 commands:
   customspawner:
-    description: Display plugin commands list.
-    aliases: [cs]
+    description: Display the plugin commands list.
+    aliases: [cs, customs, cspawner]
+permissions:
+  customspawner.*:
+    description: Give access to all the plugin commands.
+    children:
+      customspawner.give: true
+      customspawner.pickaxe: true
+      customspawner.bypass: true
+  customspawner.give:
+    description: Allow player to give spawners.
+    default: op
+  customspawner.pickaxe:
+    description: Give a pickaxe who allow players to break a spawner.
+    default: op
+  customspawner.bypass:
+    description: Allow player to destoy spawners without the specific pickaxe.
+    default: op

@@ -17,11 +17,15 @@ public final class Utils {
     }
 
     public static void noPerm(Player player){
-        player.sendMessage("§cYou are not allowed to use that command");
+        player.sendMessage("§4You are not allowed to use that command");
     }
 
     public static boolean isOnline(Player pl){
         return pl.isOnline();
+    }
+
+    public static String format(String msg){
+        return ChatColor.translateAlternateColorCodes('&', msg);
     }
 
 }

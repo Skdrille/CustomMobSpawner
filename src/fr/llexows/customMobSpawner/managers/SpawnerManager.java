@@ -10,7 +10,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Llexows.
@@ -23,6 +26,7 @@ public class SpawnerManager {
     private Inventory inv, inv2;
     private HashMap<CreatureSpawner, SpawnerType> spawners = new HashMap<>();
     public String actual = "§cNONE";
+    private List<UUID> inBypass = new ArrayList<>();
 
     public SpawnerManager(Core instance){
         this.instance = instance;
@@ -106,6 +110,18 @@ public class SpawnerManager {
     public SpawnerType getSpawnerType(CreatureSpawner cs){
         if(!spawners.containsKey(cs)) return null;
         return spawners.get(cs);
+    }
+
+    public boolean isBypass(Player player){
+        return inBypass.contains(player.getUniqueId());
+    }
+
+    public void setBypass(Player player, boolean bol){
+        if(bol){
+            inBypass.add(player.getUniqueId());
+        }else{
+            inBypass.remove(player.getUniqueId());
+        }
     }
 
 }

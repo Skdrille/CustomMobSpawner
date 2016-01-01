@@ -22,24 +22,16 @@ public final class GiveCommand extends PluginCommand {
     public void execute(Player player, String[] args) {
         ItemStack spawner = new ItemStack(Material.MOB_SPAWNER);
 
-        switch(args.length){
-            case 1:
-                player.getInventory().addItem(spawner);
-                Utils.sendMessage(player, ConfigManager.getMessage("recieved-mob-spawner"));
-                break;
-            case 2:
-                for(Player pl : Bukkit.getOnlinePlayers()){
-                    if(pl.getName().toLowerCase().equalsIgnoreCase(args[1].toLowerCase())){
-                        pl.getInventory().addItem(spawner);
-                        Utils.sendMessage(player, ConfigManager.getMessage("give-spawner-player").replace("%player%", pl.getName()));
-                        return;
-                    }
+        if(args.length == 2){
+            for(Player pl : Bukkit.getOnlinePlayers()){
+                if(pl.getName().toLowerCase().equalsIgnoreCase(args[1].toLowerCase())){
+                    pl.getInventory().addItem(spawner);
+                    Utils.sendMessage(player, ConfigManager.getMessage("give-spawner-player").replace("%player%", pl.getName()));
+                    return;
                 }
+            }
 
-                player.getInventory().addItem(spawner);
-                Utils.sendMessage(player, "§aYou recieved a mob spawner.");
-
-                break;
+            Utils.sendMessage(player, ConfigManager.getMessage("player-not-found").replace("%player%", args[1]));
         }
     }
 }

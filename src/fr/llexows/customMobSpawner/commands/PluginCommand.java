@@ -28,5 +28,4 @@ public abstract class PluginCommand {
     }
 
     public abstract void execute(Player player, String[] args);
-
 }

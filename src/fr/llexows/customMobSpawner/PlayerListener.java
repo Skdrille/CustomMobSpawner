@@ -2,9 +2,16 @@ package fr.llexows.customMobSpawner;
 
 import fr.llexows.customMobSpawner.managers.ConfigManager;
 import fr.llexows.customMobSpawner.managers.SpawnerManager;
+import net.minecraft.server.v1_8_R3.EntityWither;
+import net.minecraft.server.v1_8_R3.GenericAttributes;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
+import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -33,10 +40,8 @@ public class PlayerListener implements Listener {
         if(e.getAction() == Action.RIGHT_CLICK_BLOCK){
             Block b = e.getClickedBlock();
             if(b.getType().equals(Material.MOB_SPAWNER)){
-                if(player.isOp() || player.hasPermission("custommobspawner.use")){
-                    spawnerManager.openSelectionInventory(player, 1);
-                    playerSpawner.put(player, (CreatureSpawner) b.getState());
-                }
+                spawnerManager.openSelectionInventory(player, 1);
+                playerSpawner.put(player, (CreatureSpawner) b.getState());
             }
         }
     }
@@ -64,13 +69,22 @@ public class PlayerListener implements Listener {
                     if(type.getEggIcon().equals(item)){
                         //If the monster type is disabled from the config
                         if(!type.isAvailable()){
-                            Utils.sendMessage(player, "§cThis type in not available !");
+                            Utils.sendMessage(player, ConfigManager.getMessage("spawner-type-not-available"));
                             return;
                         }
+
+                        if(!Core.getEconomyManager().hasEnoughMoney(player, type.getPrice())){
+                            Utils.sendMessage(player, ConfigManager.getMessage("no-enough-money"));
+                            return;
+                        }
+
                         CreatureSpawner cs = playerSpawner.get(player);
                         spawnerManager.setSpawnerType(cs, type);
-                        Utils.sendMessage(player, "Spawner type modified : §e" + type.getTypeName());
+                        Utils.sendMessage(player, ConfigManager.getMessage("spawner-type-changed").replace("%type%", type.getTypeName()));
                         cs.update();
+                        if(type.getPrice() > 0){
+                            Core.getEconomyManager().takeMoney(player, type.getPrice());
+                        }
                     }
                 }
             }
@@ -84,12 +98,14 @@ public class PlayerListener implements Listener {
         if(b.getType().equals(Material.MOB_SPAWNER)){
             if(player.getItemInHand() != null){
                 ItemStack item = player.getItemInHand();
-                if(item.getType().equals(Material.GOLD_PICKAXE) && item.getItemMeta().getDisplayName().equals("§b§l§nMagic Pickaxe")){
+                if(item.getType().equals(Material.GOLD_PICKAXE) && item.getItemMeta().getDisplayName().equals(ConfigManager.getConfig().getString("Global.magic-pickaxe-title").replace('&', '§'))){
                     ItemStack spawner = new ItemStack(Material.MOB_SPAWNER);
                     player.setItemInHand(spawner);
                 }else{
-                    e.setCancelled(true);
-                    Utils.sendMessage(player, ConfigManager.getMessage("cannot-break-spawner"));
+                    if(!Core.getSpawnerManager().isBypass(player)) {
+                        e.setCancelled(true);
+                        Utils.sendMessage(player, ConfigManager.getMessage("cannot-break-spawner"));
+                    }
                 }
             }
         }

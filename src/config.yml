@@ -1,93 +1,135 @@
+Global:
+
+  price-color: '&b'
+  price-free: '&aFREE'
+
+  #The spawner type status who will be display in the egg description.
+  available-status: '&aAVAILABLE'
+
+  not-available-status: '&cNOT AVAILABLE'
+
+  #Beware to the material spell and the enderscores !
+  magic-pickaxe-material: GOLD_PICKAXE
+
+  magic-pickaxe-title: '&a&lMagic Pickaxe'
+
+  magic-pickaxe-desc: '&aCan break a spawner ? &e:O'
+
 Spawner-type:
+
   CREEPER:
+    egg-title: '&a&lCreeper'
     price: 0
     available: true
 
   SKELETON:
+    egg-title: '&7&lSkeleton'
     price: 0
     available: true
   SPIDER:
+    egg-title: '&8&lSpider'
     price: 0
     available: true
 
   ZOMBIE:
+    egg-title: '&2&lZombie'
     price: 0
     available: true
   SLIME:
+    egg-title: '&a&lSlime'
     price: 0
     available: true
 
   GHAST:
+    egg-title: '&lGhast'
     price: 0
     available: true
 
   PIGZOMBIE:
+    egg-title: '&d&lPigZombie'
     price: 0
     available: true
 
   CAVESPIDER:
+    egg-title: '&8&lCave-Spider'
     price: 0
     available: true
 
   SILVERFISH:
+    egg-title: '&7&lSilverfigh'
     price: 0
     available: true
 
   ENDERMAN:
+    egg-title: '&9Enderman'
     price: 0
     available: true
 
   BLAZE:
+    egg-title: '&6&lBlaze'
     price: 0
     available: true
 
   LAVASLIME:
+    egg-title: '&c&lMagma Cube'
     price: 0
     available: true
 
   ENDERDRAGON:
+    egg-title: '&1&ken&r&1&lEnder Dragon &ken'
     price: 0
     available: true
 
   ENDERMITE:
+    egg-title: '&5&lEndermite'
     price: 0
     available: true
 
   GUARDIAN:
+    egg-title: '&3&lGuardian'
     price: 0
     available: true
 
   PIG:
+    egg-title: '&d&lPig'
     price: 0
     available: true
 
   SHEEP:
+    egg-title: '&7&lSheep'
     price: 0
     available: true
   COW:
+    egg-title: '&e&lCow'
     price: 0
     available: true
   CHICKEN:
+    egg-title: '&e&lChicken'
     price: 0
     available: true
 
   SQUID:
+    egg-title: '&b&lSquid'
     price: 0
     available: true
 
   WOLF:
+    egg-title: '&7&lWolf'
     price: 0
     available: true
 
   MUSHROOMCOW:
+    egg-title: '&4&lMush&froom'
     price: 0
     available: true
 
   RABBIT:
+    egg-title: '&2&lRabbit'
     price: 0
     available: true
 
   VILLAGER:
+    egg-title: '&6&lVillager'
     price: 0
     available: true
 
@@ -96,16 +138,33 @@ Spawner-type:
 #############################################
 
 # %player% = a player name
+# %type% =  the spawner typeS
+# %amount% = the amount
 
 messages:
+
   recieved-mob-spawner: '&6You recieved a mob spawner !'
+
+  invalid-amount: '&cInvalid amount !'
 
   give-spawner-player: '&bYou gave 1 mob spawner to  %player% .'
 
-  cannot-break-spawner: '&cYou need to use a magic pickaxe to pick up to retrieve the spawner.'
+  cannot-break-spawner: '&4You need to use a magic pickaxe to retrieve the spawner.'
 
   received-magic-pickaxe: '&aYou received a magic pickaxe !'
+
+  gave-magic-pickaxe: '&aYou gave a magic pickage to %player% .'
 
   player-not-found: '&cCannot find the player %player% !'
 
   config-reloaded: '&3Configuration reloaded !'
+
+  spawner-type-not-available: '&cThis spawner type in not available !'
+
+  spawner-type-changed: 'Spawner type changed : &e %type%'
+
+  no-enough-money: '&cYou do not have enough money to buy this spawner type !'
+
+  bypass-enable: '&eBypass &aenabled ! &eYou are free to break spawner !'
+
+  bypass-disable: '&eBypass &cdisabled !'
