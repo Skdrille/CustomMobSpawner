@@ -1,5 +1,7 @@
-package fr.llexows.customMobSpawner;
+package fr.llexows.customMobSpawner.managers;
 
+import fr.llexows.customMobSpawner.Core;
+import fr.llexows.customMobSpawner.SpawnerType;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
@@ -71,10 +73,25 @@ public class SpawnerManager {
         getSpawnerTypeInventory(1).setItem(13, SpawnerType.ZOMBIE.getEggIcon());
         getSpawnerTypeInventory(1).setItem(14, SpawnerType.SLIME.getEggIcon());
         getSpawnerTypeInventory(1).setItem(15, SpawnerType.GHAST.getEggIcon());
+        getSpawnerTypeInventory(1).setItem(16, SpawnerType.PIGZOMBIE.getEggIcon());
+        getSpawnerTypeInventory(1).setItem(19, SpawnerType.CAVE_SPIDER.getEggIcon());
+        getSpawnerTypeInventory(1).setItem(20, SpawnerType.SILVERFISH.getEggIcon());
+        getSpawnerTypeInventory(1).setItem(21, SpawnerType.ENDERMAN.getEggIcon());
+        getSpawnerTypeInventory(1).setItem(22, SpawnerType.BLAZE.getEggIcon());
+        getSpawnerTypeInventory(1).setItem(23, SpawnerType.MAGMA_CUBE.getEggIcon());
+        getSpawnerTypeInventory(1).setItem(24, SpawnerType.ENDER_DRAGON.getEggIcon());
+        getSpawnerTypeInventory(1).setItem(25, SpawnerType.ENDERMITE.getEggIcon());
+        getSpawnerTypeInventory(1).setItem(28, SpawnerType.GUARDIAN.getEggIcon());
 
         getSpawnerTypeInventory(2).setItem(10, SpawnerType.PIG.getEggIcon());
         getSpawnerTypeInventory(2).setItem(11, SpawnerType.SHEEP.getEggIcon());
         getSpawnerTypeInventory(2).setItem(12, SpawnerType.COW.getEggIcon());
+        getSpawnerTypeInventory(2).setItem(13, SpawnerType.CHICKEN.getEggIcon());
+        getSpawnerTypeInventory(2).setItem(14, SpawnerType.SQUID.getEggIcon());
+        getSpawnerTypeInventory(2).setItem(15, SpawnerType.WOLF.getEggIcon());
+        getSpawnerTypeInventory(2).setItem(16, SpawnerType.MUSHROOM_COW.getEggIcon());
+        getSpawnerTypeInventory(2).setItem(19, SpawnerType.RABBIT.getEggIcon());
+        getSpawnerTypeInventory(2).setItem(20, SpawnerType.VILLAGER.getEggIcon());
     }
 
     public void openSelectionInventory(Player player, int page){
