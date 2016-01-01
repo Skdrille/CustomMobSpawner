@@ -1,0 +1,111 @@
+Spawner-type:
+  CREEPER:
+    price: 0
+    available: true
+
+  SKELETON:
+    price: 0
+    available: true
+  SPIDER:
+    price: 0
+    available: true
+
+  ZOMBIE:
+    price: 0
+    available: true
+  SLIME:
+    price: 0
+    available: true
+
+  GHAST:
+    price: 0
+    available: true
+
+  PIGZOMBIE:
+    price: 0
+    available: true
+
+  CAVESPIDER:
+    price: 0
+    available: true
+
+  SILVERFISH:
+    price: 0
+    available: true
+
+  ENDERMAN:
+    price: 0
+    available: true
+
+  BLAZE:
+    price: 0
+    available: true
+
+  LAVASLIME:
+    price: 0
+    available: true
+
+  ENDERDRAGON:
+    price: 0
+    available: true
+
+  ENDERMITE:
+    price: 0
+    available: true
+
+  GUARDIAN:
+    price: 0
+    available: true
+
+  PIG:
+    price: 0
+    available: true
+
+  SHEEP:
+    price: 0
+    available: true
+  COW:
+    price: 0
+    available: true
+  CHICKEN:
+    price: 0
+    available: true
+
+  SQUID:
+    price: 0
+    available: true
+
+  WOLF:
+    price: 0
+    available: true
+
+  MUSHROOMCOW:
+    price: 0
+    available: true
+
+  RABBIT:
+    price: 0
+    available: true
+
+  VILLAGER:
+    price: 0
+    available: true
+
+#############################################
+#              PLUGIN MESSAGES              #
+#############################################
+
+# %player% = a player name
+
+messages:
+  recieved-mob-spawner: '&6You recieved a mob spawner !'
+
+  give-spawner-player: '&bYou gave 1 mob spawner to  %player% .'
+
+  cannot-break-spawner: '&cYou need to use a magic pickaxe to pick up to retrieve the spawner.'
+
+  received-magic-pickaxe: '&aYou received a magic pickaxe !'
+
+  player-not-found: '&cCannot find the player %player% !'
+
+  config-reloaded: '&3Configuration reloaded !'
