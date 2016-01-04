@@ -22,14 +22,12 @@ import java.util.UUID;
  */
 public class SpawnerManager {
 
-    private Core instance;
     private Inventory inv, inv2;
     private HashMap<CreatureSpawner, SpawnerType> spawners = new HashMap<>();
-    public String actual = "§cNONE";
     private List<UUID> inBypass = new ArrayList<>();
+    private HashMap<Player, CreatureSpawner> playerSpawner = new HashMap<>();
 
-    public SpawnerManager(Core instance){
-        this.instance = instance;
+    public SpawnerManager(){
         this.inv = Bukkit.createInventory(null, 9*6, "§l♦ Select spawner type ♦");
         this.inv2 = Bukkit.createInventory(null, 9*6,"§l♦ Select spawner type ♦");
 }
@@ -122,6 +120,10 @@ public class SpawnerManager {
         }else{
             inBypass.remove(player.getUniqueId());
         }
+    }
+
+    public HashMap<Player, CreatureSpawner> getPlayerSpawner(){
+        return playerSpawner;
     }
 
 }

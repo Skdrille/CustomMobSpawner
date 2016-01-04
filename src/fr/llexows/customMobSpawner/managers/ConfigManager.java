@@ -1,6 +1,7 @@
 package fr.llexows.customMobSpawner.managers;
 
 import fr.llexows.customMobSpawner.Core;
+import fr.llexows.customMobSpawner.Utils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -8,14 +9,13 @@ import java.util.HashMap;
 
 /**
  * Created by Llexows.
- *
- * @version 0.1
+ * @version 1.0.1
  */
 public final class ConfigManager {
 
     private Core instance;
     private static FileConfiguration config;
-    private static HashMap<String, String> messages = new HashMap<>();
+    private static HashMap<String, String> pluginMessages = new HashMap<>();
 
     public ConfigManager(Core instance){
         this.instance = instance;
@@ -44,16 +44,17 @@ public final class ConfigManager {
         registerMesage("gave-magic-pickaxe", "gave-magic-pickaxe");
     }
 
+    public static String getMessage(String key){
+        if(pluginMessages.get(key) == null || pluginMessages.get(key).equals("")) return "Null";
+        return pluginMessages.get(key);
+    }
+
     public static FileConfiguration getConfig(){
         return config;
     }
 
-    public static String getMessage(String key){
-        return messages.get(key);
-    }
-
     private void registerMesage(String key, String section){
-        messages.put(key, ChatColor.translateAlternateColorCodes('&', getConfig().getString("messages."+section)));
+        pluginMessages.put(key, Utils.format(config.getString("messages."+section)));
     }
 
 }

@@ -7,8 +7,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 
 /**
  * Created by Llexows.
- *
- * @version 0.1
+ * @version 1.0.1
  */
 public final class EconomyManager {
 
@@ -20,6 +19,7 @@ public final class EconomyManager {
     }
 
     public boolean setupEconomy() {
+        //If the plugin manager can not found Vault plugin, CustomSpawner plugin is stopped.
         if (instance.getServer().getPluginManager().getPlugin("Vault") == null) {
             return false;
         }
@@ -31,16 +31,23 @@ public final class EconomyManager {
         return eco != null;
     }
 
-    private Economy getEconomy(){
-        return eco;
-    }
-
+    /**
+     * <b>Check if the player has enough money before buy spawner type.</b>
+     * @param player the player to check.
+     * @param required the money required.
+     * @return true if has, not if hasn't.
+     */
     public boolean hasEnoughMoney(Player player, double required){
-        return getEconomy().getBalance(player) >= required;
+        return eco.getBalance(player) >= required;
     }
 
+    /**
+     * <b>Withdraw money from the player account after spawner type buying</b>
+     * @param player player to withdraw.
+     * @param amount amount to withdray from player account.
+     */
     public void takeMoney(Player player, double amount){
-        getEconomy().withdrawPlayer(player, amount);
+        eco.withdrawPlayer(player, amount);
     }
 
 

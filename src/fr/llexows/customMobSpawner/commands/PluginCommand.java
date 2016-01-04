@@ -11,7 +11,15 @@ import org.bukkit.entity.Player;
 public abstract class PluginCommand {
 
     protected final Core instance = Core.getInstance();
+
+    /**
+     * The commande name (use as arg 0 after /customspawner command)
+     */
     private final String name;
+
+    /**
+     * The command needed permission
+     */
     private final String permission;
 
     public PluginCommand(String name, String permission){
@@ -19,13 +27,24 @@ public abstract class PluginCommand {
         this.permission = permission;
     }
 
+    /**
+     * <b>Get the command name</b>
+     */
     public String getName(){
         return name;
     }
 
+    /**
+     * <b>Get the command needed permission</b>
+     */
     public String getPermission(){
         return permission;
     }
 
+    /**
+     * <b>Called when a player dispatch the command name</b>
+     * @param player the player sender
+     * @param args the other arguments
+     */
     public abstract void execute(Player player, String[] args);
 }

@@ -12,8 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  * Created by Llexows.
- *
- * @version 0.1
+ * @version 1.0.1
  */
 public enum SpawnerType {
     CREEPER("Creeper", 50),
@@ -41,53 +40,90 @@ public enum SpawnerType {
     RABBIT("Rabbit", 101),
     VILLAGER("Villager", 120);
 
+    /**
+     * The livingentity's type name which is use as 'id' for set spawner type.
+     */
     private final String type_name;
-    private String displayName;
-    private ItemStack eggIcon;
+
+    /**
+     * The name displayed as egg item name.
+     */
+    private final String displayName;
+
+    /**
+     * The egg item associated with the livingentity type (ex:  Skeleton egg for skeleton type, ...)
+     */
+    private final ItemStack eggIcon;
+
+    /**
+     * Required money to set this spawner type (load from the config).
+     */
     private double price;
+
+    /**
+     * Type status, if false, this spawner type cannot be use from the GUI (load from the config).
+     */
     private boolean available;
 
     SpawnerType(String type_name, int type_id){
         this.type_name = type_name;
-        this.displayName = ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig().getString("Spawner-type." + type_name.toUpperCase() + ".egg-title"));
+
+        this.displayName = Utils.format(ConfigManager.getConfig().getString("Spawner-type." + type_name.toUpperCase() + ".egg-title"));
+
         this.price = ConfigManager.getConfig().getDouble("Spawner-type." + type_name.toUpperCase() + ".price");
+
         this.available = ConfigManager.getConfig().getBoolean("Spawner-type."+type_name.toUpperCase() + ".available");
 
         this.eggIcon = new ItemStack(Material.MONSTER_EGG, 1, (byte) type_id);
-        updatePriceAndAvailableState();
-    }
 
-    public String getTypeName(){
-        return type_name;
-    }
-
-    public String getDisplayName(){
-        return displayName;
-    }
-
-    public ItemStack getEggIcon(){
-        return eggIcon;
-    }
-
-    public boolean isAvailable(){
-        return available;
-    }
-
-    public double getPrice(){
-        return price;
-    }
-
-    private void updatePriceAndAvailableState(){
         price = ConfigManager.getConfig().getDouble("Spawner-type." + type_name.toUpperCase() + ".price");
         available = ConfigManager.getConfig().getBoolean("Spawner-type."+type_name.toUpperCase() + ".available");
 
+        /*
+        Build the type egg item with the price and the available status in the item description.
+         */
         ItemMeta meta = eggIcon.getItemMeta();
         meta.setDisplayName(displayName);
         List<String> lore = new ArrayList<>();
+        //If price = 0, display 'FREE'
         lore.add("Price : " + (price == 0 ? Utils.format(ConfigManager.getConfig().getString("Global.price-free")) :  (Utils.format(ConfigManager.getConfig().getString("Global.price-color"))) + price));
         lore.add("Status : " + (isAvailable() ?  Utils.format(ConfigManager.getConfig().getString("Global.available-status")): Utils.format(ConfigManager.getConfig().getString("Global.not-available-status"))));
         meta.setLore(lore);
         eggIcon.setItemMeta(meta);
     }
 
+    /**
+     * <b>Get type name</b>
+     */
+    public String getTypeName(){
+        return type_name;
+    }
+
+    /**
+     * <b>Get type egg item title</b>
+     */
+    public String getDisplayName(){
+        return displayName;
+    }
+
+    /**
+     * <b>Get type egg item</b>
+     */
+    public ItemStack getEggIcon(){
+        return eggIcon;
+    }
+
+    /**
+     * <b>Get type status</b>
+     */
+    public boolean isAvailable(){
+        return available;
+    }
+
+    /**
+     * <b>Get type price</b>
+     */
+    public double getPrice(){
+        return price;
+    }
 }

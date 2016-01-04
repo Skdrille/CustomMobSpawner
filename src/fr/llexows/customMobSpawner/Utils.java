@@ -5,27 +5,28 @@ import org.bukkit.entity.Player;
 
 /**
  * Created by Llexows.
- *
- * @version 0.1
+ * @version 1.0.1
  */
 public final class Utils {
 
     public static final String PLUGIN = "§8[§6CustomSpawner§8]§r ";
 
+    /**
+     * <b>Send a message to the target player with the plugin tag.</b>
+     * @param player the target player.
+     * @param message the message to send.
+     */
     public static void sendMessage(Player player, String message){
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', PLUGIN + message));
+        player.sendMessage(format(PLUGIN + message));
     }
 
-    public static void noPerm(Player player){
-        player.sendMessage("§4You are not allowed to use that command");
-    }
-
-    public static boolean isOnline(Player pl){
-        return pl.isOnline();
-    }
-
-    public static String format(String msg){
-        return ChatColor.translateAlternateColorCodes('&', msg);
+    /**
+     * <b>Format color codes in the message</b>
+     * @param msg the message to format
+     * @return the formated message
+     */
+    public static String format(String message){
+        return ChatColor.translateAlternateColorCodes('&', message);
     }
 
 }
