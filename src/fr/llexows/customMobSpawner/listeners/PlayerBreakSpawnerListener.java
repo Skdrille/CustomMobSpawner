@@ -1,10 +1,14 @@
 package fr.llexows.customMobSpawner.listeners;
 
 import fr.llexows.customMobSpawner.Core;
+import fr.llexows.customMobSpawner.SpawnerType;
 import fr.llexows.customMobSpawner.Utils;
+import fr.llexows.customMobSpawner.exceptions.CustomSpawnerException;
 import fr.llexows.customMobSpawner.managers.ConfigManager;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.CreatureSpawner;
+import org.bukkit.entity.Creature;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -26,8 +30,17 @@ public class PlayerBreakSpawnerListener implements Listener {
         if(b.getType().equals(Material.MOB_SPAWNER)){
             if(player.getItemInHand() != null){
                 ItemStack item = player.getItemInHand();
-                if(item.getType().equals(Material.GOLD_PICKAXE) && item.getItemMeta().getDisplayName().equals(ConfigManager.getConfig().getString("Global.magic-pickaxe-title").replace('&', '§'))){
-                    ItemStack spawner = new ItemStack(Material.MOB_SPAWNER);
+                ItemStack magicPickaxe = null;
+                try{
+                    magicPickaxe = Core.getInstance().getSpawnerManager().getMagicPickaxe();
+                }catch(CustomSpawnerException ex){
+                    ex.printStackTrace();
+                    return;
+                }
+
+                if(item.equals(magicPickaxe)){
+                    SpawnerType spawnerType = Core.getInstance().getSpawnerManager().getSpawnerType((CreatureSpawner) b.getState());
+                    ItemStack spawner = Core.getInstance().getSpawnerManager().createItemSpawnerWithSpecifiedType(spawnerType);
                     player.setItemInHand(spawner);
                 }else{
                     if(!Core.getInstance().getSpawnerManager().isBypass(player)) {

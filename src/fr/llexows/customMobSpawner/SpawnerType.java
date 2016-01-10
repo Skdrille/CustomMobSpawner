@@ -126,4 +126,14 @@ public enum SpawnerType {
     public double getPrice(){
         return price;
     }
+
+    public static SpawnerType getByTypeName(String type_name){
+        for(SpawnerType spawnerType : values()){
+            if(spawnerType.getTypeName().equalsIgnoreCase(type_name)){
+                return  spawnerType;
+            }
+        }
+        return null;
+    }
+
 }

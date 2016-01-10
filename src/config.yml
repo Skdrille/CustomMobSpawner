@@ -9,7 +9,7 @@ Global:
   not-available-status: '&cNOT AVAILABLE'
 
   #Beware to the material spell and the enderscores !
-  magic-pickaxe-material: GOLD_PICKAXE
+  magic-pickaxe-material: 'GOLD_PICKAXE'
 
   magic-pickaxe-title: '&a&lMagic Pickaxe'
 
@@ -147,7 +147,7 @@ messages:
 
   invalid-amount: '&cInvalid amount !'
 
-  give-spawner-player: '&bYou gave 1 mob spawner to  %player% .'
+  give-spawner-player: '&bYou gave %amount% mob spawner(s) to  %player% .'
 
   cannot-break-spawner: '&4You need to use a magic pickaxe to retrieve the spawner.'
 
@@ -168,3 +168,7 @@ messages:
   bypass-enable: '&eBypass &aenabled ! &eYou are free to break spawner !'
 
   bypass-disable: '&eBypass &cdisabled !'
+
+  buy-sign-no-perm: '&cYou don t have the permission to create spawner buy sign !'
+
+  buy-sign-successful-created: '&aThe buy sign has been successfully created !'

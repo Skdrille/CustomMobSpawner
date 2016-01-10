@@ -1,6 +1,7 @@
 package fr.llexows.customMobSpawner;
 
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
@@ -16,8 +17,8 @@ public final class Utils {
      * @param player the target player.
      * @param message the message to send.
      */
-    public static void sendMessage(Player player, String message){
-        player.sendMessage(format(PLUGIN + message));
+    public static void sendMessage(CommandSender sender, String message){
+        sender.sendMessage(format(PLUGIN + message));
     }
 
     /**

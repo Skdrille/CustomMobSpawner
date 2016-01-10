@@ -1,6 +1,7 @@
 package fr.llexows.customMobSpawner.commands;
 
 import fr.llexows.customMobSpawner.Core;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
@@ -46,5 +47,5 @@ public abstract class PluginCommand {
      * @param player the player sender
      * @param args the other arguments
      */
-    public abstract void execute(Player player, String[] args);
+    public abstract void execute(CommandSender sender, String[] args);
 }

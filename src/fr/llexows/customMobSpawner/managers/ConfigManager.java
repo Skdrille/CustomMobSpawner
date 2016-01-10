@@ -42,6 +42,8 @@ public final class ConfigManager {
         registerMesage("bypass-enable", "bypass-enable");
         registerMesage("bypass-disable", "bypass-disable");
         registerMesage("gave-magic-pickaxe", "gave-magic-pickaxe");
+        registerMesage("buy-sign-no-perm", "buy-sign-no-perm");
+        registerMesage("buy-sign-successful-created", "buy-sign-successful-created");
     }
 
     public static String getMessage(String key){

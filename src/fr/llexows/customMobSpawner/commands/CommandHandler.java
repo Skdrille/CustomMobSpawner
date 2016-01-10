@@ -31,20 +31,10 @@ public final class CommandHandler implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         /*
-        If the command sender isn't a player
-         */
-        if(!(sender instanceof Player)){
-            sender.sendMessage("§4Only player can use that command !");
-            return true;
-        }
-
-        Player player = (Player) sender;
-
-        /*
         If the arguments length == 0, then we display the commands list to the player sender
          */
         if(args.length == 0){
-            displayPluginCommands(player);
+            displayPluginCommands(sender);
             return true;
         }
 
@@ -53,12 +43,12 @@ public final class CommandHandler implements CommandExecutor {
                 /*
                 If the player doesn't have the command permission
                  */
-                if(!player.hasPermission(pc.getPermission())){
-                    Utils.sendMessage(player, "§4You are not allowed to use that command");
+                if(sender instanceof Player && !((Player) sender).hasPermission(pc.getPermission())){
+                    Utils.sendMessage((Player) sender, "§4You are not allowed to use that command");
                     return true;
                 }
 
-                pc.execute(player, args);
+                pc.execute(sender, args);
                 return true;
             }
         }
@@ -66,7 +56,7 @@ public final class CommandHandler implements CommandExecutor {
         /*
         If the argument 0 isn't associated with a plugin command, then...
          */
-        displayPluginCommands(player);
+        displayPluginCommands(sender);
 
         return false;
     }
@@ -80,16 +70,15 @@ public final class CommandHandler implements CommandExecutor {
     }
 
     /**
-     * <b>Display the plugin commands to the target player</b>
-     * @param player the target player
+     * <b>Display the plugin commands to the command sender</b>
      */
-    public void displayPluginCommands(Player player){
+    public void displayPluginCommands(CommandSender sender){
         String[] commands = new String[]{
                 "§b§m---§m---§m---§m---§m---§m---§m---§m---§m---§m---§m---§m---§m---§m---§m---§m---",
                 "  §6CustomSpawner commands : ",
                 "",
-                "  §a/cs give <player> <entity_type>(optional) .",
-                "  §7(To give a mob spawner to the specific player).",
+                "  §a/cs give <player> <entity_type>(optional) <amount>(optional).",
+                "  §7(To give mob spawner(s) to the specific player).",
                 "",
                 "  §a/cs pickaxe <player> .",
                 "  §7(To give a pickaxe to the specific player for save a spawner when destroy).",
@@ -100,7 +89,7 @@ public final class CommandHandler implements CommandExecutor {
                 "§b§m---§m---§m---§m---§m---§m---§m---§m---§m---§m---§m---§m---§m---§m---§m---§m---"
         };
         for(String cmd : commands){
-            player.sendMessage(cmd);
+            sender.sendMessage(cmd);
         }
     }
 }

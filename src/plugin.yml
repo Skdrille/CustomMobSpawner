@@ -1,5 +1,5 @@
 name: CustomSpawner
-version: 1.0.1
+version: 1.0.2
 author: Llexows
 main: fr.llexows.customMobSpawner.Core
 depend: [Vault]
@@ -11,9 +11,14 @@ permissions:
   customspawner.*:
     description: Give access to all the plugin commands.
     children:
+      customspawner.gui: true
       customspawner.give: true
       customspawner.pickaxe: true
       customspawner.bypass: true
+      customspawner.buysign: true
+  customspawner.gui:
+    description: Allow player to open spawner type selection gui.
+    default: op
   customspawner.give:
     description: Allow player to give spawners.
     default: op
@@ -22,4 +27,7 @@ permissions:
     default: op
   customspawner.bypass:
     description: Allow player to destoy spawners without the specific pickaxe.
+    default: op
+  customspawner.buysign:
+    description: Allow player to create spawner sign shop.
     default: op

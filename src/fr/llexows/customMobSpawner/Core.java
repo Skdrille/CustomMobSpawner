@@ -1,10 +1,7 @@
 package fr.llexows.customMobSpawner;
 
 import fr.llexows.customMobSpawner.commands.CommandHandler;
-import fr.llexows.customMobSpawner.listeners.PlayerBreakSpawnerListener;
-import fr.llexows.customMobSpawner.listeners.PlayerOpenGUIListener;
-import fr.llexows.customMobSpawner.listeners.PlayerPlaceSpawnerListener;
-import fr.llexows.customMobSpawner.listeners.PlayerSelectSpawnerTypeListener;
+import fr.llexows.customMobSpawner.listeners.*;
 import fr.llexows.customMobSpawner.managers.ConfigManager;
 import fr.llexows.customMobSpawner.managers.EconomyManager;
 import fr.llexows.customMobSpawner.managers.SpawnerManager;
@@ -41,6 +38,8 @@ public class Core extends JavaPlugin {
 
         spawnerManager.init();
 
+        registerListeners();
+
         getCommand("customspawner").setExecutor(commandHandler);
     }
 
@@ -58,6 +57,7 @@ public class Core extends JavaPlugin {
         pm.registerEvents(new PlayerSelectSpawnerTypeListener(), this);
         pm.registerEvents(new PlayerPlaceSpawnerListener(), this);
         pm.registerEvents(new PlayerBreakSpawnerListener(), this);
+        pm.registerEvents(new PlayerCreateBuySignListener(), this);
     }
 
     /**

@@ -23,8 +23,10 @@ public class PlayerOpenGUIListener implements Listener {
         if(e.getAction() == Action.RIGHT_CLICK_BLOCK){
             Block b = e.getClickedBlock();
             if(b.getType().equals(Material.MOB_SPAWNER)){
-                Core.getInstance().getSpawnerManager().openSelectionInventory(player, 1);
-                Core.getInstance().getSpawnerManager().getPlayerSpawner().put(player, (CreatureSpawner) b.getState());
+                if(player.hasPermission("customspawner.gui")) {
+                    Core.getInstance().getSpawnerManager().openSelectionInventory(player, 1);
+                    Core.getInstance().getSpawnerManager().getPlayerSpawner().put(player, (CreatureSpawner) b.getState());
+                }
             }
         }
     }
